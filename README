@@ -1,0 +1,25 @@
+# Personal Portfolio Website
+
+Simple web portfolio with tagline and social links.
+
+Based on [Vitepress](https://vitepress.dev/)
+
+## Project setup
+
+To begin developing, clone the repo and run the following command to pull dependencies from npm:
+
+```
+npm install
+```
+
+For live compliation and hot-reloads during development, use the following script:
+
+```
+npm run dev
+```
+
+To build and minify for live use, use the following script:
+
+```
+npm run build
+```

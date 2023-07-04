@@ -1,24 +1,23 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
-layout: home
+layout: splash
+title: Brian Horvat
+titleTemplate: :title
 
 hero:
-  name: "website"
-  text: "Simple personal portfolio website"
-  tagline: My great project tagline
+  name: "Brian Horvat"
+  tagline: "Full Stack Software Engineer"
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Email Me
+      link: mailto:brian@horvat.dev
+      icon: email
     - theme: alt
-      text: API Examples
-      link: /api-examples
-
-features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+      text: Github
+      link: https://github.com/BrianHorvat
+      icon: github
+    - theme: alt
+      text: LinkedIn
+      link: https://www.linkedin.com/in/brian-horvat-9b95b1174
+      icon: linkedin
 ---

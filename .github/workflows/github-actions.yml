@@ -1,0 +1,70 @@
+name: Deploy
+
+concurrency:
+  group: production
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  NODE_VERSION: 18
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: install and build
+        run: |
+          npm install
+          npm run build
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: website
+          path: ./.vitepress/dist
+
+  deploy:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+    environment: production
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: download built artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: website
+          path: artifactfiles
+
+      - name: move previous deployment
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.WEBSITE_HOST }}
+          username: ${{ secrets.WEBSITE_USER }}
+          key: ${{ secrets.WEBSITE_SSH_KEY }}
+          script: |
+            [ -d ${{ vars.WEBSITE_HTML_PATH }}/html ] && mv ${{ vars.WEBSITE_HTML_PATH }}/html ${{ vars.WEBSITE_HTML_PATH }}/html-old-$(date -Is)
+
+      - name: copy artifact to server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.WEBSITE_HOST }}
+          username: ${{ secrets.WEBSITE_USER }}
+          key: ${{ secrets.WEBSITE_SSH_KEY }}
+          source: artifactfiles/*
+          target: ${{ vars.WEBSITE_HTML_PATH }}/html

@@ -68,3 +68,4 @@ jobs:
           key: ${{ secrets.WEBSITE_SSH_KEY }}
           source: artifactfiles/*
           target: ${{ vars.WEBSITE_HTML_PATH }}/html
+          strip_components: 1

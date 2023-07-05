@@ -50,28 +50,18 @@ defineProps<{
 
 <style scoped>
 .VPHero {
-  margin-top: calc(
-    (var(--vp-nav-height) + var(--vp-layout-top-height, 0px)) * -1
-  );
-  padding: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 48px)
-    24px 48px;
+  padding: 24px;
 }
 
 @media (min-width: 640px) {
   .VPHero {
-    padding: calc(
-        var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 80px
-      )
-      48px 64px;
+    padding: 48px;
   }
 }
 
 @media (min-width: 960px) {
   .VPHero {
-    padding: calc(
-        var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 80px
-      )
-      64px 64px;
+    padding: 64px;
   }
 }
 
